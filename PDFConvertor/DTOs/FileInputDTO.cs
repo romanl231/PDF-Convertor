@@ -8,7 +8,8 @@ namespace PDFConvertor.DTOs
 {
     internal class FileInputDTO
     {
-        public string FilePath { get; set; } = string.Empty;
+        public List<string> FilePaths { get; set; } = new List<string>();
         public string OutputPath {  get; set; } = string.Empty;
+        public ConvertationType ConvertationType { get; set; }
     }
 }

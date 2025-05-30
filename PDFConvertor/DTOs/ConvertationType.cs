@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PDFConvertor.DTOs.ConvertationErrors
+namespace PDFConvertor.DTOs
 {
-    internal enum ConvertationErrorCode
+    internal enum ConvertationType
     {
-        EmptyImagePathList,
-        UnknownError
+        Image,
+        Html,
+        Docx,
     }
 }
