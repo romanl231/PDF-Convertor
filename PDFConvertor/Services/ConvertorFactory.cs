@@ -10,7 +10,7 @@ using System.Windows.Diagnostics;
 
 namespace PDFConvertor.Services
 {
-    internal class ConvertorFactory
+    public class ConvertorFactory
     {
         public readonly PdfSharpCoreConverter _imageConvertor;
 

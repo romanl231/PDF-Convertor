@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PDFConvertor.DTOs
 {
-    internal enum ConvertationType
+    public enum ConvertationType
     {
         Image,
         Html,

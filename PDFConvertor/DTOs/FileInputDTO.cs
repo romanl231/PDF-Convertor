@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PDFConvertor.DTOs
 {
-    internal class FileInputDTO
+    public class FileInputDTO
     {
         public List<string> FilePaths { get; set; } = new List<string>();
         public string OutputPath {  get; set; } = string.Empty;

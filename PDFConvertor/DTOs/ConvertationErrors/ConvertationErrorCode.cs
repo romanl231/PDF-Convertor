@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PDFConvertor.DTOs.ConvertationErrors
 {
-    internal enum ConvertationErrorCode
+    public enum ConvertationErrorCode
     {
         EmptyImagePathList,
         UnknownError

@@ -14,7 +14,7 @@ using System.IO;
 
 namespace PDFConvertor.Services
 {
-    internal class PdfSharpCoreConverter
+    public class PdfSharpCoreConverter
     {
         public PdfSharpCoreConverter() { }
 
@@ -54,7 +54,7 @@ namespace PDFConvertor.Services
 
                 using var outputStream = new MemoryStream();
                 document.Save(outputStream);
-                File.WriteAllBytes(outputPdfPath, outputStream.ToArray());
+                File.WriteAllBytes($"{outputPdfPath}\\converted.pdf", outputStream.ToArray());
 
                 return ConvertationResult.Success();
             }

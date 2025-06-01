@@ -1,5 +1,7 @@
-﻿using System.Text;
+﻿using PDFConvertor.ViewModels;
+using System.Text;
 using System.Windows;
+using PDFConvertor.Services;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;

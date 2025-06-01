@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PDFConvertor.DTOs.ConvertationErrors
 {
-    internal class ConvertationResult
+    public class ConvertationResult
     {
         public bool IsSuccess { get; init; }
         public ConvertationErrorCode? Error { get; init; }
