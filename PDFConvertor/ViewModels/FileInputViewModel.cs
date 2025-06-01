@@ -1,6 +1,7 @@
 ﻿using PDFConvertor.Commands;
 using PDFConvertor.DTOs;
-using PDFConvertor.Services;
+using PDFConvertor.Factories;
+using PDFConvertor.Services.Interface;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -34,13 +35,15 @@ namespace PDFConvertor.ViewModels
         public ICommand BrowseCommand { get; }
         public ICommand BrowsePath { get; }
 
-        private readonly ConvertorFactory _factory;
+        private readonly IConvertionService _convertionService;
+        private readonly IFileDialogService _dialogService;
 
         public string StatusMessage { get; set; } = string.Empty;
 
-        public FileInputViewModel(ConvertorFactory factory)
+        public FileInputViewModel(IConvertionService convertionService, IFileDialogService dialogService)
         {
-            _factory = factory;
+            _dialogService = dialogService;
+            _convertionService = convertionService;
             ConvertCommand = new RelayCommand(Convert);
             BrowseCommand = new RelayCommand(BrowseFiles);
             BrowsePath = new RelayCommand(BrowseFile);
@@ -55,7 +58,7 @@ namespace PDFConvertor.ViewModels
                 ConvertationType = SelectedConvertationType,
             };
 
-            var result = _factory.ConvertFileToPdf(dto);
+            var result = _convertionService.Convert(dto);
             StatusMessage = result.IsSuccess ? "File successfully created!" 
                 : $"An error occurred {result.Error}";
 
@@ -64,15 +67,11 @@ namespace PDFConvertor.ViewModels
 
         private void BrowseFiles()
         {
-            var dialog = new Microsoft.Win32.OpenFileDialog
-            {
-                Multiselect = true,
-                Filter = "All files (*.*)|*.*"
-            };
+            var files = _dialogService.OpenFilesDialog();
 
-            if (dialog.ShowDialog() == true)
+            if (files != null)
             {
-                foreach (var path in dialog.FileNames)
+                foreach (var path in files)
                 {
                     SelectedFilePaths.Add(path);
                 }
@@ -83,14 +82,11 @@ namespace PDFConvertor.ViewModels
 
         private void BrowseFile()
         {
-            var dialog = new Microsoft.Win32.OpenFolderDialog
-            {
-                Multiselect = true,
-            };
+            var folder = _dialogService.OpenFolderDialog();
 
-            if (dialog.ShowDialog() == true)
+            if (folder != null)
             {
-                OutPutPath = dialog.FolderName;
+                OutPutPath = folder;
                 OnPropertyChanged(nameof(OutPutPath));
             }
         }
