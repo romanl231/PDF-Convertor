@@ -33,7 +33,9 @@ namespace PDFConvertor.ViewModels
 
         public ICommand ConvertCommand { get; }
         public ICommand BrowseCommand { get; }
-        public ICommand BrowsePath { get; }
+        public ICommand BrowseFolderPath { get; }
+        public ICommand DeletePath {  get; }
+        public ICommand ClearPaths { get; }
 
         private readonly IConvertionService _convertionService;
         private readonly IFileDialogService _dialogService;
@@ -46,7 +48,9 @@ namespace PDFConvertor.ViewModels
             _convertionService = convertionService;
             ConvertCommand = new RelayCommand(Convert);
             BrowseCommand = new RelayCommand(BrowseFiles);
-            BrowsePath = new RelayCommand(BrowseFile);
+            BrowseFolderPath = new RelayCommand(BrowseFolder);
+            ClearPaths = new RelayCommand(ClearChoosenPaths);
+            DeletePath = new RelayCommand(param => DeleteFilePath((string)param));
         }
 
         private void Convert()
@@ -67,7 +71,7 @@ namespace PDFConvertor.ViewModels
 
         private void BrowseFiles()
         {
-            var files = _dialogService.OpenFilesDialog();
+            var files = _dialogService.OpenFilesDialog(SelectedConvertationType);
 
             if (files != null)
             {
@@ -80,7 +84,7 @@ namespace PDFConvertor.ViewModels
             }
         }
 
-        private void BrowseFile()
+        private void BrowseFolder()
         {
             var folder = _dialogService.OpenFolderDialog();
 
@@ -89,6 +93,17 @@ namespace PDFConvertor.ViewModels
                 OutPutPath = folder;
                 OnPropertyChanged(nameof(OutPutPath));
             }
+        }
+
+        private void DeleteFilePath(string filePath)
+        {
+            if (filePath != null)
+                SelectedFilePaths.Remove(filePath);
+        }
+
+        private void ClearChoosenPaths() 
+        {
+            SelectedFilePaths.Clear();
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

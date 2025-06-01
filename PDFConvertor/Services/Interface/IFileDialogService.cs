@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PDFConvertor.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace PDFConvertor.Services.Interface
 {
     public interface IFileDialogService
     {
-        IEnumerable<string>? OpenFilesDialog();
+        IEnumerable<string>? OpenFilesDialog(ConvertationType convertationType);
         string? OpenFolderDialog();
     }
 }
