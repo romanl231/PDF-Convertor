@@ -29,10 +29,10 @@ namespace PDFConvertor.Factories
                     result = _imageConvertor.ConvertImagesToPdf(fileInputDTO);
                     break;
                 case ConversionType.Html:
-                    result = ConversionResult.Fail(ConversionErrorCode.UnknownError);
+                    result = ConversionResult.Fail(ConversionErrorCode.WillApearSoon);
                     break;
                 case ConversionType.Docx:
-                    result = ConversionResult.Fail(ConversionErrorCode.UnknownError);
+                    result = ConversionResult.Fail(ConversionErrorCode.WillApearSoon);
                     break;
             }
             return result;

@@ -11,5 +11,6 @@ namespace PDFConvertor.DTOs.ConversionErrors
         EmptyImagePathList,
         UnknownError,
         NameOccupied,
+        WillApearSoon,
     }
 }
