@@ -1,5 +1,5 @@
 ﻿using PDFConvertor.DTOs;
-using PDFConvertor.DTOs.ConvertationErrors;
+using PDFConvertor.DTOs.ConversionErrors;
 using PDFConvertor.Factories;
 using PDFConvertor.Services.Interface;
 using System;
@@ -10,16 +10,16 @@ using System.Threading.Tasks;
 
 namespace PDFConvertor.Services
 {
-    public class ConvertionService : IConvertionService
+    public class ConversionService : IConversionService
     {
         private readonly ConvertorFactory _convertorFactory;
 
-        public ConvertionService(ConvertorFactory convertorFactory)
+        public ConversionService(ConvertorFactory convertorFactory)
         {
             _convertorFactory = convertorFactory;
         }
 
-        public ConvertationResult Convert(FileInputDTO dto)
+        public ConversionResult Convert(FileInputDTO dto)
         {
             var result = _convertorFactory.ConvertFileToPdf(dto);
             return result;

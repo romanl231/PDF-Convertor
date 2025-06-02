@@ -5,26 +5,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PDFConvertor.DTOs.ConvertationErrors
+namespace PDFConvertor.DTOs.ConversionErrors
 {
-    public class ConvertationResult
+    public class ConversionResult
     {
         public bool IsSuccess { get; init; }
-        public ConvertationErrorCode? Error { get; init; }
+        public ConversionErrorCode? Error { get; init; }
         public PdfDocument? Document { get; init; }
 
-        public static ConvertationResult Success(PdfDocument document) => new()
+        public static ConversionResult Success(PdfDocument document) => new()
         {
             IsSuccess = true,
             Document = document,
         };
 
-        public static ConvertationResult Fail(ConvertationErrorCode error) => new()
+        public static ConversionResult Fail(ConversionErrorCode error) => new()
         {
             IsSuccess = false,
             Error = error
         };
 
-        public static ConvertationResult Success() => new() { IsSuccess = true };
+        public static ConversionResult Success() => new() { IsSuccess = true };
     }
 }

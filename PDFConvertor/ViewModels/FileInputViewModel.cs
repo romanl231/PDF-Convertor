@@ -17,16 +17,17 @@ namespace PDFConvertor.ViewModels
     {
         public ObservableCollection<string> SelectedFilePaths { get; set; } = new();
         public string OutPutPath { get; set; } = string.Empty;
-        private ConvertationType _selectedConvertationType = ConvertationType.Image;
-        public ConvertationType SelectedConvertationType
+        public string FileName { get; set; } = "convertedToPDF";
+        private ConversionType _selectedConversionType = ConversionType.Image;
+        public ConversionType SelectedConversionType
         {
-            get => _selectedConvertationType;
+            get => _selectedConversionType;
             set
             {
-                if (_selectedConvertationType != value)
+                if (_selectedConversionType != value)
                 {
-                    _selectedConvertationType = value;
-                    OnPropertyChanged(nameof(SelectedConvertationType));
+                    _selectedConversionType = value;
+                    OnPropertyChanged(nameof(SelectedConversionType));
                 }
             }
         }
@@ -36,16 +37,17 @@ namespace PDFConvertor.ViewModels
         public ICommand BrowseFolderPath { get; }
         public ICommand DeletePath {  get; }
         public ICommand ClearPaths { get; }
+        public ICommand BrowseName { get; }
 
-        private readonly IConvertionService _convertionService;
+        private readonly IConversionService _conversionService;
         private readonly IFileDialogService _dialogService;
 
         public string StatusMessage { get; set; } = string.Empty;
 
-        public FileInputViewModel(IConvertionService convertionService, IFileDialogService dialogService)
+        public FileInputViewModel(IConversionService conversionService, IFileDialogService dialogService)
         {
             _dialogService = dialogService;
-            _convertionService = convertionService;
+            _conversionService = conversionService;
             ConvertCommand = new RelayCommand(Convert);
             BrowseCommand = new RelayCommand(BrowseFiles);
             BrowseFolderPath = new RelayCommand(BrowseFolder);
@@ -59,10 +61,11 @@ namespace PDFConvertor.ViewModels
             {
                 FilePaths = SelectedFilePaths.ToList(),
                 OutputPath = OutPutPath,
-                ConvertationType = SelectedConvertationType,
+                ConversionType = SelectedConversionType,
+                FileName = FileName,
             };
 
-            var result = _convertionService.Convert(dto);
+            var result = _conversionService.Convert(dto);
             StatusMessage = result.IsSuccess ? "File successfully created!" 
                 : $"An error occurred {result.Error}";
 
@@ -71,7 +74,7 @@ namespace PDFConvertor.ViewModels
 
         private void BrowseFiles()
         {
-            var files = _dialogService.OpenFilesDialog(SelectedConvertationType);
+            var files = _dialogService.OpenFilesDialog(SelectedConversionType);
 
             if (files != null)
             {
@@ -110,7 +113,7 @@ namespace PDFConvertor.ViewModels
         protected void OnPropertyChanged(string name) => 
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
-        public IEnumerable<ConvertationType> ConvertationTypes =>
-            Enum.GetValues(typeof(ConvertationType)).Cast<ConvertationType>();
+        public IEnumerable<ConversionType> ConversionTypes =>
+            Enum.GetValues(typeof(ConversionType)).Cast<ConversionType>();
     }
 }

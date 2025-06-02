@@ -8,8 +8,9 @@ using SixLabors.ImageSharp.PixelFormats;
 using PdfSharpCore.Drawing;
 using PdfSharpCore.Pdf;
 using PdfSharpCore.Utils;
-using PDFConvertor.DTOs.ConvertationErrors;
+using PDFConvertor.DTOs.ConversionErrors;
 using System.IO;
+using PDFConvertor.DTOs;
 
 
 namespace PDFConvertor.Services
@@ -18,17 +19,22 @@ namespace PDFConvertor.Services
     {
         public PdfSharpCoreConverter() { }
 
-        public ConvertationResult ConvertImagesToPdf(List<string> imagePaths, string outputPdfPath)
+        public ConversionResult ConvertImagesToPdf(FileInputDTO dto)
         {
             var document = new PdfDocument();
-            if (imagePaths == null || imagePaths.Count == 0)
-                return ConvertationResult.Fail(ConvertationErrorCode.EmptyImagePathList);
+            if (dto.FilePaths == null || dto.FilePaths.Count == 0)
+                return ConversionResult.Fail(ConversionErrorCode.EmptyImagePathList);
+
+            var fullOutputPath = Path.Combine(dto.OutputPath, dto.FileName + ".pdf");
+
+            if (File.Exists(fullOutputPath))
+                return ConversionResult.Fail(ConversionErrorCode.NameOccupied);
 
             try
             {
-                foreach (var imagePath in imagePaths)
+                foreach (var filePath in dto.FilePaths)
                 {
-                    using var image = Image.Load<Rgba32>(imagePath);
+                    using var image = Image.Load<Rgba32>(filePath);
                     using var imageStream = new MemoryStream();
 
                     image.SaveAsPng(imageStream);
@@ -54,15 +60,14 @@ namespace PDFConvertor.Services
 
                 using var outputStream = new MemoryStream();
                 document.Save(outputStream);
-                File.WriteAllBytes($"{outputPdfPath}\\converted.pdf", outputStream.ToArray());
+                File.WriteAllBytes(fullOutputPath, outputStream.ToArray());
 
-                return ConvertationResult.Success();
+                return ConversionResult.Success();
             }
             catch(Exception)
             {
-                return ConvertationResult.Fail(ConvertationErrorCode.UnknownError);
+                return ConversionResult.Fail(ConversionErrorCode.UnknownError);
             }
         }
-    
     }
 }

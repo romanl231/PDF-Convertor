@@ -1,5 +1,5 @@
 ﻿using PDFConvertor.DTOs;
-using PDFConvertor.DTOs.ConvertationErrors;
+using PDFConvertor.DTOs.ConversionErrors;
 using PDFConvertor.Services;
 using System;
 using System.Collections.Generic;
@@ -20,19 +20,19 @@ namespace PDFConvertor.Factories
             _imageConvertor = imageConvertor;
         }
 
-        public ConvertationResult ConvertFileToPdf(FileInputDTO fileInputDTO)
+        public ConversionResult ConvertFileToPdf(FileInputDTO fileInputDTO)
         {
-            var result = new ConvertationResult();
-            switch (fileInputDTO.ConvertationType)
+            var result = new ConversionResult();
+            switch (fileInputDTO.ConversionType)
             {
-                case ConvertationType.Image:
-                    result = _imageConvertor.ConvertImagesToPdf(fileInputDTO.FilePaths, fileInputDTO.OutputPath);
+                case ConversionType.Image:
+                    result = _imageConvertor.ConvertImagesToPdf(fileInputDTO);
                     break;
-                case ConvertationType.Html:
-                    result = ConvertationResult.Fail(ConvertationErrorCode.UnknownError);
+                case ConversionType.Html:
+                    result = ConversionResult.Fail(ConversionErrorCode.UnknownError);
                     break;
-                case ConvertationType.Docx:
-                    result = ConvertationResult.Fail(ConvertationErrorCode.UnknownError);
+                case ConversionType.Docx:
+                    result = ConversionResult.Fail(ConversionErrorCode.UnknownError);
                     break;
             }
             return result;

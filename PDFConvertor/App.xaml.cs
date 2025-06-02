@@ -32,7 +32,7 @@ namespace PDFConvertor
         {
             services.AddSingleton<ConvertorFactory>();
             services.AddSingleton<IFileDialogService, FileDialogService>();
-            services.AddSingleton<IConvertionService, ConvertionService>();
+            services.AddSingleton<IConversionService, ConversionService>();
             services.AddSingleton<PdfSharpCoreConverter>();
 
             services.AddSingleton<FileInputViewModel>();

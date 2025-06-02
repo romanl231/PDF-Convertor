@@ -16,14 +16,14 @@ namespace PDFConvertor.Services
         private const string _docxTypes = "Word Documents (*.docx)|*.docx";
         private const string _htmlTypes = "HTML files (*.html;*.htm)|*.html;*.htm";
 
-        public IEnumerable<string>? OpenFilesDialog(ConvertationType convertationType)
+        public IEnumerable<string>? OpenFilesDialog(ConversionType convertationType)
         {
             switch (convertationType) {
-                case ConvertationType.Image:
+                case ConversionType.Image:
                     return OpenImageDialog();
-                case ConvertationType.Html:
+                case ConversionType.Html:
                     return OpenHTMLDialog();
-                case ConvertationType.Docx:
+                case ConversionType.Docx:
                     return OpenDocxDialog();
                 default:
                     return null;

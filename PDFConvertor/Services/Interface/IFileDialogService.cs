@@ -9,7 +9,7 @@ namespace PDFConvertor.Services.Interface
 {
     public interface IFileDialogService
     {
-        IEnumerable<string>? OpenFilesDialog(ConvertationType convertationType);
+        IEnumerable<string>? OpenFilesDialog(ConversionType conversionType);
         string? OpenFolderDialog();
     }
 }

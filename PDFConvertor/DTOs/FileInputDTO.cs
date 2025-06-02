@@ -10,6 +10,7 @@ namespace PDFConvertor.DTOs
     {
         public List<string> FilePaths { get; set; } = new List<string>();
         public string OutputPath {  get; set; } = string.Empty;
-        public ConvertationType ConvertationType { get; set; }
+        public string FileName { get; set; } = string.Empty;
+        public ConversionType ConversionType { get; set; }
     }
 }

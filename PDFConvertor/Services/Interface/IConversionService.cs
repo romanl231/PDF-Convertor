@@ -1,5 +1,5 @@
 ﻿using PDFConvertor.DTOs;
-using PDFConvertor.DTOs.ConvertationErrors;
+using PDFConvertor.DTOs.ConversionErrors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace PDFConvertor.Services.Interface
 {
-    public interface IConvertionService
+    public interface IConversionService
     {
-        ConvertationResult Convert(FileInputDTO dto);
+        ConversionResult Convert(FileInputDTO dto);
     }
 }
