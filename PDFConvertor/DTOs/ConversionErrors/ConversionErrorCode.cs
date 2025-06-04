@@ -12,5 +12,6 @@ namespace PDFConvertor.DTOs.ConversionErrors
         UnknownError,
         NameOccupied,
         WillApearSoon,
+        WrongFileFormat,
     }
 }

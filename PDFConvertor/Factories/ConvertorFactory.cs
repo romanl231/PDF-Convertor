@@ -1,6 +1,7 @@
 ﻿using PDFConvertor.DTOs;
 using PDFConvertor.DTOs.ConversionErrors;
 using PDFConvertor.Services;
+using PDFConvertor.Converters.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +14,13 @@ namespace PDFConvertor.Factories
 {
     public class ConvertorFactory
     {
-        public readonly PdfSharpCoreConverter _imageConvertor;
+        public readonly IPdfSharpCoreConverter _imageConvertor;
+        public readonly ISynfusionConverter _synfusionConverter;
 
-        public ConvertorFactory(PdfSharpCoreConverter imageConvertor)
+        public ConvertorFactory(IPdfSharpCoreConverter imageConvertor, ISynfusionConverter synfusionConverter)
         {
             _imageConvertor = imageConvertor;
+            _synfusionConverter = synfusionConverter;
         }
 
         public ConversionResult ConvertFileToPdf(FileInputDTO fileInputDTO)
@@ -32,7 +35,7 @@ namespace PDFConvertor.Factories
                     result = ConversionResult.Fail(ConversionErrorCode.WillApearSoon);
                     break;
                 case ConversionType.Docx:
-                    result = ConversionResult.Fail(ConversionErrorCode.WillApearSoon);
+                    result = _synfusionConverter.ConvertWordFilesToPdf(fileInputDTO);
                     break;
             }
             return result;

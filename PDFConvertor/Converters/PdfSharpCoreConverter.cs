@@ -11,11 +11,12 @@ using PdfSharpCore.Utils;
 using PDFConvertor.DTOs.ConversionErrors;
 using System.IO;
 using PDFConvertor.DTOs;
+using PDFConvertor.Converters.Interfaces;
 
 
 namespace PDFConvertor.Services
 {
-    public class PdfSharpCoreConverter
+    public class PdfSharpCoreConverter : IPdfSharpCoreConverter
     {
         public PdfSharpCoreConverter() { }
 
