@@ -17,7 +17,7 @@ A simple yet powerful WPF application for converting images and DOCX documents i
 
 ## 🛠 Technologies Used
 
-- [.NET 7.0](https://dotnet.microsoft.com/download/dotnet/7.0)
+- [.NET 8.0](https://dotnet.microsoft.com/download/dotnet/8.0)
 - WPF
 - MVVM Pattern
 - [PdfSharpCore](https://github.com/ststeiger/PdfSharpCore)
@@ -53,7 +53,7 @@ A simple yet powerful WPF application for converting images and DOCX documents i
 
 ### Prerequisites
 
-- .NET SDK 7.0 or higher
+- .NET SDK 8.0 or higher
 - Visual Studio 2022 or Rider (or any IDE that supports WPF and .NET 7)
 
 ### Clone the Repository
