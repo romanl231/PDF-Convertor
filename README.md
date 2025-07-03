@@ -54,7 +54,7 @@ A simple yet powerful WPF application for converting images and DOCX documents i
 ### Prerequisites
 
 - .NET SDK 8.0 or higher
-- Visual Studio 2022 or Rider (or any IDE that supports WPF and .NET 7)
+- Visual Studio 2022 or Rider (or any IDE that supports WPF and .NET 8)
 
 ### Clone the Repository
 
